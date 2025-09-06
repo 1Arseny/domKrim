@@ -1,0 +1,27 @@
+@import "tailwindcss";
+
+/* Компоненты */
+@layer components {
+  /* Базовая кнопка в стиле Яндекса */
+  .btn-ya {
+    @apply inline-flex items-center gap-2 rounded-full
+           bg-[#FFCC00] text-black
+           px-3 py-1 text-xs font-semibold
+           ring-1 ring-black/10 shadow-sm
+           hover:bg-[#e6b800]
+           active:translate-y-px
+           focus:outline-none focus-visible:ring-4 focus-visible:ring-black/20
+           transition;
+  }
+
+  /* Крупнее для десктопа (по желанию) */
+  .btn-ya-lg {
+    @apply px-4 py-2 text-sm;
+  }
+
+  /* Небольшой круглый бейдж с «Я» (опционально) */
+  .ya-badge {
+    @apply inline-flex h-4 w-4 items-center justify-center rounded-full
+           bg-black text-[#FFCC00] font-bold leading-none;
+  }
+}
