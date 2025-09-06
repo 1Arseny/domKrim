@@ -24,4 +24,15 @@
     @apply inline-flex h-4 w-4 items-center justify-center rounded-full
            bg-black text-[#FFCC00] font-bold leading-none;
   }
+  .price-aside { @apply w-[min(92vw,360px)] md:w-[360px]; }
+  .price-amount { @apply whitespace-nowrap; }
+  
+    @media (max-width: 639px) {
+    .subnav-mobile-link[aria-current="page"] {
+        background-color: rgba(255,255,255,.20);
+        color: #fff;
+        font-weight: 600;
+    }
+    .subnav-mobile-link[aria-current="page"]:hover { color: #fff; }
+    }
 }
