@@ -2,5 +2,5 @@
 import { defineConfig } from 'vite';
 
 export default defineConfig({
-  base: '/DimanKrim/', // например: '/dimankrim/'
+  base: '/domKrim/', // например: '/dimankrim/'
 });

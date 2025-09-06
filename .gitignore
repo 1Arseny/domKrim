@@ -1,6 +1,8 @@
 # зависимости
 /node_modules
 
+# сборка Vite
+/dist
 
 # локальные окружения
 .env.local
