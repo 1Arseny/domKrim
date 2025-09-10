@@ -31,7 +31,16 @@ jobs:
         run: npm ci
 
       - name: Build with Vite
+        # Для project pages (repo вида owner/repo) ставим base="/repo/"
+        # Для user/org pages (repo "<user>.github.io") УДАЛИ эту VITE_BASE строку или поставь "/"
+        env:
+          NODE_ENV: production
+          VITE_BASE: "/${{ github.event.repository.name }}/"
         run: npm run build
+
+      # SPA fallback: чтобы /routes работали на Pages
+      - name: Create 404 fallback
+        run: cp dist/index.html dist/404.html
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
