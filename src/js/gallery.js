@@ -84,23 +84,28 @@ function closeLightbox() {
 // ---------- Показ изображения (без зума/драга) ----------
 function show(i) {
   if (!images.length) return;
-
   index = (i + images.length) % images.length;
   const item = images[index];
 
   lbCounter.textContent = `${index + 1}/${images.length}`;
   selectThumb(index);
 
+  // Сброс для нового изображения
+  resetZoom();
+
   lbImg.onload = () => {
     lbImg.onload = null;
-    // ничего не масштабируем и не двигаем — пусть вписывается CSS-ом
-    lbImg.style.maxWidth = 'min(96vw, 1280px)';
-    lbImg.style.maxHeight = '100%';
+    const stageW = lbStage.clientWidth;
+    const stageH = lbStage.clientHeight;
+
+    lbImg.style.maxWidth = stageW * 0.85 + 'px';   // 85% ширины области просмотра
+    lbImg.style.maxHeight = stageH * 0.85 + 'px'; // 85% высоты области
     lbImg.style.width = 'auto';
     lbImg.style.height = 'auto';
     lbImg.style.transform = 'none';
     lbImg.style.cursor = 'default';
   };
+
 
   lbImg.src = item.full || item.src;
 }
@@ -168,3 +173,97 @@ lb.addEventListener('click', (e) => {
   const stage = document.getElementById('lb-stage');
   if (e.target === lb || e.target === stage) closeLightbox();
 });
+
+// ======== Touch-only zoom/pan ========
+let scale = 1;
+let translateX = 0, translateY = 0;
+const MIN_SCALE = 1;
+const MAX_SCALE = 4;
+
+let startDist = 0;          // расстояние между пальцами
+let startScale = 1;         // масштаб на момент начала pinch
+let lastTouchX = 0, lastTouchY = 0; // для pan одним пальцем
+
+function dist(t1, t2) {
+  const dx = t2.clientX - t1.clientX;
+  const dy = t2.clientY - t1.clientY;
+  return Math.hypot(dx, dy);
+}
+
+function applyTransform() {
+  lbImg.style.transform = `translate3d(${translateX}px, ${translateY}px, 0) scale(${scale})`;
+}
+
+function clampPan() {
+  // не даём утащить картинку слишком далеко за края
+  const imgRect = lbImg.getBoundingClientRect();
+  const stageRect = lbStage.getBoundingClientRect();
+
+  // полуширина/полувысота видимой картинки при текущем масштабе
+  const halfW = (lbImg.naturalWidth  * (scale * imgRect.height / lbImg.naturalHeight)) / 2;
+  // Простейшая, но надёжная эвристика: ограничим по размерам контейнера
+  // Рассчитаем максимально допустимый сдвиг с учётом текущего масштаба и размеров.
+  const maxX = Math.max(0, (imgRect.width  * scale - stageRect.width ) / 2);
+  const maxY = Math.max(0, (imgRect.height * scale - stageRect.height) / 2);
+
+  translateX = Math.min(maxX, Math.max(-maxX, translateX));
+  translateY = Math.min(maxY, Math.max(-maxY, translateY));
+}
+
+lbStage.addEventListener('touchstart', (e) => {
+  if (e.touches.length === 2) {
+    // pinch start
+    startDist = dist(e.touches[0], e.touches[1]);
+    startScale = scale;
+  } else if (e.touches.length === 1) {
+    // pan start (только если уже увеличено)
+    lastTouchX = e.touches[0].clientX;
+    lastTouchY = e.touches[0].clientY;
+  }
+}, { passive: false });
+
+lbStage.addEventListener('touchmove', (e) => {
+  if (e.touches.length === 2) {
+    e.preventDefault();
+    const newDist = dist(e.touches[0], e.touches[1]);
+    const factor = newDist / (startDist || newDist);
+    scale = Math.max(MIN_SCALE, Math.min(MAX_SCALE, startScale * factor));
+    clampPan();
+    applyTransform();
+  } else if (e.touches.length === 1 && scale > 1) {
+    e.preventDefault();
+    const x = e.touches[0].clientX;
+    const y = e.touches[0].clientY;
+    translateX += (x - lastTouchX);
+    translateY += (y - lastTouchY);
+    lastTouchX = x;
+    lastTouchY = y;
+    clampPan();
+    applyTransform();
+  }
+}, { passive: false });
+
+lbStage.addEventListener('touchend', () => {
+  // при отпускании, если масштаб меньше 1 — вернём в 1
+  if (scale < MIN_SCALE) {
+    scale = MIN_SCALE;
+    translateX = translateY = 0;
+    applyTransform();
+  }
+});
+
+function resetZoom() {
+  scale = 1;
+  translateX = 0;
+  translateY = 0;
+  applyTransform();
+}
+
+let lastTap = 0;
+lbStage.addEventListener('touchend', (e) => {
+  const now = Date.now();
+  if (now - lastTap < 300) {
+    resetZoom();
+  }
+  lastTap = now;
+}, { passive: true });

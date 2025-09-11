@@ -203,7 +203,7 @@
       <div class="absolute inset-0 bg-black/85 backdrop-blur-sm"></div>
 
       <!-- центр -->
-      <div class="absolute inset-0 flex flex-col min-h-0">
+      <div class="absolute inset-0 grid grid-rows-[auto,1fr,auto] min-h-0">
         <!-- верхняя панель -->
         <div class="flex items-center justify-between px-3 sm:px-6 py-2">
           <div class="text-white/80 text-sm"><span id="lb-title" class="font-semibold"></span> • <span id="lb-counter">1/1</span></div>
@@ -214,7 +214,7 @@
 
         <!-- основная область просмотра -->
         <div id="lb-stage"
-            class="relative flex-1 min-h-0 grid place-items-center select-none p-3 sm:p-6">
+          class="relative min-h-0 overflow-hidden grid place-items-center select-none p-3 sm:p-6">
         <button data-prev class="absolute left-3 top-1/2 -translate-y-1/2 z-10 rounded-full bg-white/90 p-3 ring-1 ring-black/10 shadow hover:bg-white">‹</button>
         <button data-next class="absolute right-3 top-1/2 -translate-y-1/2 z-10 rounded-full bg-white/90 p-3 ring-1 ring-black/10 shadow hover:bg-white">›</button>
 
@@ -226,7 +226,7 @@
 
 
         <!-- миниатюры -->
-        <div class="bg-black/60 shrink-0">
+        <div class="bg-black/60">
           <div id="lb-thumbs" class="mx-auto max-w-7xl px-3 sm:px-6 py-2 flex gap-2 overflow-x-auto"></div>
         </div>
       </div>
