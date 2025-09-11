@@ -29,7 +29,7 @@ document.querySelectorAll('[data-scroll-to]').forEach((btn) => {
 });
 
 // ======================
-//  ГАЛЕРЕЯ / МОДАЛКА БЕЗ ЗУМА
+//  ГАЛЕРЕЯ / МОДАЛКА
 // ======================
 const lb = document.getElementById('lightbox');
 const lbImg = document.getElementById('lb-img');
@@ -39,7 +39,7 @@ const lbCounter = document.getElementById('lb-counter');
 const thumbsWrap = document.getElementById('lb-thumbs');
 
 let currentGroup = '';
-let images = [];              // [{src, full}]
+let images = []; // [{src, full}]
 let index = 0;
 
 // Собираем превью и группируем по data-gallery
@@ -67,12 +67,6 @@ function openLightbox(group, startIndex = 0) {
   lb.classList.remove('hidden');
   document.documentElement.style.overflow = 'hidden'; // lock scroll
 
-  // Спрячем (если оставили в разметке) кнопки зума
-  ['in','out','reset'].forEach(k => {
-    const el = lb.querySelector(`[data-zoom="${k}"]`);
-    if (el) el.style.display = 'none';
-  });
-
   show(index);
 }
 
@@ -81,7 +75,7 @@ function closeLightbox() {
   document.documentElement.style.overflow = '';
 }
 
-// ---------- Показ изображения (без зума/драга) ----------
+// ---------- Показ изображения ----------
 function show(i) {
   if (!images.length) return;
   index = (i + images.length) % images.length;
@@ -90,7 +84,7 @@ function show(i) {
   lbCounter.textContent = `${index + 1}/${images.length}`;
   selectThumb(index);
 
-  // Сброс для нового изображения
+  // сброс зума при смене кадра
   resetZoom();
 
   lbImg.onload = () => {
@@ -98,14 +92,11 @@ function show(i) {
     const stageW = lbStage.clientWidth;
     const stageH = lbStage.clientHeight;
 
-    lbImg.style.maxWidth = stageW * 0.85 + 'px';   // 85% ширины области просмотра
-    lbImg.style.maxHeight = stageH * 0.85 + 'px'; // 85% высоты области
+    lbImg.style.maxWidth = stageW * 0.85 + 'px';
+    lbImg.style.maxHeight = stageH * 0.85 + 'px';
     lbImg.style.width = 'auto';
     lbImg.style.height = 'auto';
-    lbImg.style.transform = 'none';
-    lbImg.style.cursor = 'default';
   };
-
 
   lbImg.src = item.full || item.src;
 }
@@ -168,21 +159,49 @@ function titleByGroupId(id) {
     default: return 'Галерея';
   }
 }
-// закрытие по клику на фон (не на изображение и не на стрелки)
+// закрытие по клику на фон
 lb.addEventListener('click', (e) => {
   const stage = document.getElementById('lb-stage');
   if (e.target === lb || e.target === stage) closeLightbox();
 });
 
-// ======== Touch-only zoom/pan ========
+// ======================
+//  Zoom & Pan (touch + desktop)
+// ======================
 let scale = 1;
 let translateX = 0, translateY = 0;
 const MIN_SCALE = 1;
 const MAX_SCALE = 4;
 
-let startDist = 0;          // расстояние между пальцами
-let startScale = 1;         // масштаб на момент начала pinch
-let lastTouchX = 0, lastTouchY = 0; // для pan одним пальцем
+// универсальное применение трансформации
+function applyTransform() {
+  lbImg.style.transform =
+    `translate3d(${translateX}px, ${translateY}px, 0) scale(${scale})`;
+  updateGrabCursor(); // << это обязательно
+}
+
+
+// универсальный сброс
+function resetZoom() {
+  scale = 1;
+  translateX = 0;
+  translateY = 0;
+  applyTransform();
+}
+
+function clampPan() {
+  const imgRect = lbImg.getBoundingClientRect();
+  const stageRect = lbStage.getBoundingClientRect();
+  const maxX = Math.max(0, (imgRect.width * scale - stageRect.width) / 2);
+  const maxY = Math.max(0, (imgRect.height * scale - stageRect.height) / 2);
+  translateX = Math.min(maxX, Math.max(-maxX, translateX));
+  translateY = Math.min(maxY, Math.max(-maxY, translateY));
+}
+
+// ----- Touch -----
+let startDist = 0;
+let startScale = 1;
+let lastTouchX = 0, lastTouchY = 0;
 
 function dist(t1, t2) {
   const dx = t2.clientX - t1.clientX;
@@ -190,33 +209,11 @@ function dist(t1, t2) {
   return Math.hypot(dx, dy);
 }
 
-function applyTransform() {
-  lbImg.style.transform = `translate3d(${translateX}px, ${translateY}px, 0) scale(${scale})`;
-}
-
-function clampPan() {
-  // не даём утащить картинку слишком далеко за края
-  const imgRect = lbImg.getBoundingClientRect();
-  const stageRect = lbStage.getBoundingClientRect();
-
-  // полуширина/полувысота видимой картинки при текущем масштабе
-  const halfW = (lbImg.naturalWidth  * (scale * imgRect.height / lbImg.naturalHeight)) / 2;
-  // Простейшая, но надёжная эвристика: ограничим по размерам контейнера
-  // Рассчитаем максимально допустимый сдвиг с учётом текущего масштаба и размеров.
-  const maxX = Math.max(0, (imgRect.width  * scale - stageRect.width ) / 2);
-  const maxY = Math.max(0, (imgRect.height * scale - stageRect.height) / 2);
-
-  translateX = Math.min(maxX, Math.max(-maxX, translateX));
-  translateY = Math.min(maxY, Math.max(-maxY, translateY));
-}
-
 lbStage.addEventListener('touchstart', (e) => {
   if (e.touches.length === 2) {
-    // pinch start
     startDist = dist(e.touches[0], e.touches[1]);
     startScale = scale;
   } else if (e.touches.length === 1) {
-    // pan start (только если уже увеличено)
     lastTouchX = e.touches[0].clientX;
     lastTouchY = e.touches[0].clientY;
   }
@@ -244,26 +241,84 @@ lbStage.addEventListener('touchmove', (e) => {
 }, { passive: false });
 
 lbStage.addEventListener('touchend', () => {
-  // при отпускании, если масштаб меньше 1 — вернём в 1
-  if (scale < MIN_SCALE) {
-    scale = MIN_SCALE;
-    translateX = translateY = 0;
-    applyTransform();
-  }
+  if (scale < MIN_SCALE) resetZoom();
 });
-
-function resetZoom() {
-  scale = 1;
-  translateX = 0;
-  translateY = 0;
-  applyTransform();
-}
 
 let lastTap = 0;
 lbStage.addEventListener('touchend', (e) => {
   const now = Date.now();
-  if (now - lastTap < 300) {
-    resetZoom();
-  }
+  if (now - lastTap < 300) resetZoom();
   lastTap = now;
 }, { passive: true });
+
+// ----- Desktop -----
+function zoomAtPointer(clientX, clientY, nextScale) {
+  nextScale = Math.max(MIN_SCALE, Math.min(MAX_SCALE, nextScale));
+  const prev = scale;
+  if (nextScale === prev) return;
+  const r = lbStage.getBoundingClientRect();
+  const px = clientX - (r.left + r.width / 2);
+  const py = clientY - (r.top + r.height / 2);
+  translateX = px - (px - translateX) * (nextScale / prev);
+  translateY = py - (py - translateY) * (nextScale / prev);
+  scale = nextScale;
+  clampPan();
+  applyTransform();
+}
+
+lbStage.addEventListener('wheel', (e) => {
+  e.preventDefault();
+  const step = e.deltaY > 0 ? 0.9 : 1.1;
+  zoomAtPointer(e.clientX, e.clientY, scale * step);
+}, { passive: false });
+
+lbStage.addEventListener('dblclick', (e) => {
+  e.preventDefault(); // не даём браузеру выделять текст / зумить страницу
+  const target = scale > 1 ? 1 : 2;
+  if (target === 1) {
+    resetZoom();          // внутри уже вызовется applyTransform() + updateGrabCursor()
+  } else {
+    zoomAtPointer(e.clientX, e.clientY, target); // внутри applyTransform()
+    updateGrabCursor();    // на всякий случай обновим курсор прямо сейчас
+  }
+});
+
+
+// drag to pan
+let isDragging = false;
+let startX = 0, startY = 0;
+
+lbStage.addEventListener('mousedown', (e) => {
+  if (scale <= 1) return;
+  isDragging = true;
+  startX = e.clientX;
+  startY = e.clientY;
+  lbStage.classList.add('drag');
+  document.addEventListener('mousemove', onMouseMove, { passive: false });
+  document.addEventListener('mouseup', onMouseUp, { passive: true });
+  e.preventDefault();
+});
+
+function onMouseMove(e) {
+  if (!isDragging) return;
+  e.preventDefault();
+  translateX += (e.clientX - startX);
+  translateY += (e.clientY - startY);
+  startX = e.clientX;
+  startY = e.clientY;
+  clampPan();
+  applyTransform();
+}
+
+function onMouseUp() {
+  isDragging = false;
+  lbStage.classList.remove('drag');
+  document.removeEventListener('mousemove', onMouseMove);
+  document.removeEventListener('mouseup', onMouseUp);
+}
+
+// курсоры
+function updateGrabCursor() {
+  if (scale > 1) lbStage.classList.add('grab');
+  else lbStage.classList.remove('grab');
+}
