@@ -148,17 +148,18 @@ function selectThumb(i) {
 function titleByGroupId(id) {
   switch (id) {
     case 'hotel': return 'Отель и территория';
-    case 'semilux-family': return 'Полулюкс семейный';
-    case 'semilux-family-4': return 'полулюксСемейный4-хМестный';
-    case 'semilux-2': return 'полу-люкс-двухместный';
-    case 'semilux-2-extra': return 'полуЛюксДвухместный+допМесто';
-    case 'family-2': return 'семейныйДвухместный';
-    case 'econom-2': return 'экономдвухместный';
-    case 'econom-3': return 'эуономТрехместный';
-    case 'family-sem-lux-3room': return 'трёхкомнатныйСемейныйПолу-люкс2';
+    case 'junior-suite-family': return 'Полулюкс семейный';
+    case 'Junior-Suite-Family-4-bed': return 'Полулюкс семейный (4-местный)';
+    case 'semi-suite-double': return 'Полулюкс двухместный';
+    case 'Semi-Lux-Double+extra-Place': return 'Полулюкс 2-местный + доп. место';
+    case 'family-double': return 'Семейный двухместный';
+    case 'economy-double': return 'Эконом двухместный';
+    case 'euonomTriple': return 'Эконом трёхместный';
+    case 'three-roomFamilyJunior suite': return 'Трёхкомнатный семейный полулюкс';
     default: return 'Галерея';
   }
 }
+
 // закрытие по клику на фон
 lb.addEventListener('click', (e) => {
   const stage = document.getElementById('lb-stage');
