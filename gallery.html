@@ -6,15 +6,34 @@
     <title>Галерея — Гостиный Домик</title>
     <link rel="stylesheet" href="/src/index.css" />
     <link rel="stylesheet" href="/src/css/gallery.css" />
+
+    <link rel="preconnect" href="https://res.cloudinary.com" crossorigin>
+
   </head>
   <body class="gallery-skin text-gray-900">
     <section class="relative isolate overflow-hidden min-h-[55svh] pb-16 sm:pb-24">
-      <img
-        src="./img/hero.jpg"
-        alt=""
-        class="absolute inset-0 -z-10 h-full w-full object-cover object-center"
-        decoding="async"
-      />
+      <picture>
+        <!-- avif (если браузер поддерживает) -->
+        <source
+          srcset="https://res.cloudinary.com/drxnyjdlx/image/upload/f_avif,q_auto,w_1920/hero_je6h7j.webp"
+          type="image/avif" />
+
+        <!-- webp (fallback) -->
+        <source
+          srcset="https://res.cloudinary.com/drxnyjdlx/image/upload/f_webp,q_auto,w_1920/hero_je6h7j.webp"
+          type="image/webp" />
+
+        <!-- общий auto (fallback jpeg для safari/старых) -->
+        <img
+          src="https://res.cloudinary.com/drxnyjdlx/image/upload/f_auto,q_auto,w_1920/hero_je6h7j.webp"
+          alt=""
+          class="absolute inset-0 -z-10 h-full w-full object-cover object-center"
+          decoding="async"
+          fetchpriority="high"
+          width="1920" height="1080"
+        />
+      </picture>
+
       <div class="absolute inset-0 -z-10 bg-gradient-to-b from-black/60 via-black/30 to-black/50"></div>
 
       <!-- Хедер и сабнавигация такие же, как на главной -->
