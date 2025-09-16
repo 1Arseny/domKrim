@@ -323,3 +323,125 @@ function updateGrabCursor() {
   if (scale > 1) lbStage.classList.add('grab');
   else lbStage.classList.remove('grab');
 }
+
+/* ===== ДИНАМИЧЕСКИЙ СЕРЫЙ ГРАДИЕНТ ПРИ СКРОЛЛЕ ===== */
+(() => {
+  const layer = document.getElementById('photo-gradient');
+  if (!layer) return;
+
+  const doc = document.documentElement;
+  const reduce = matchMedia('(prefers-reduced-motion: reduce)');
+
+  let ticking = false;
+  function onScrollOrResize(){
+    if (ticking) return;
+    ticking = true;
+    requestAnimationFrame(update);
+  }
+
+function update(){
+  ticking = false;
+
+  const max = (doc.scrollHeight - innerHeight) || 1;
+  const p = Math.min(1, Math.max(0, scrollY / max));   // 0..1 скролл-прогресс
+  const TAU = Math.PI * 2;
+
+  // угол меняется, но в спокойных пределах
+  const angle = 170 + p * 40; // 170..210°
+
+  // центр подсветки двигается по небольшому эллипсу
+  const x = 45 + Math.sin(p * TAU) * 15; // 30..60%
+  const y = 42 + Math.cos(p * TAU) * 12; // 30..54%
+
+  // плавная функция (0..1) без резких скачков
+  const ease = (t) => 0.5 - 0.5 * Math.cos(Math.PI * t);
+
+  // ⚪️ яркость строго в светлом диапазоне
+  // было: 0.06..0.12 → стало: 0.28..0.42
+  const tone = 0.28 + ease(p) * 0.14;
+
+  // 🌫 виньетка только лёгкая: 0.02..0.08
+  const vig  = 0.02 + (1 - ease((Math.sin(p * TAU) + 1) / 2)) * 0.06;
+
+  layer.style.setProperty('--angle', angle + 'deg');
+  layer.style.setProperty('--shiftX', x + '%');
+  layer.style.setProperty('--shiftY', y + '%');
+  layer.style.setProperty('--tone', tone.toFixed(3));
+  layer.style.setProperty('--vignette', vig.toFixed(3));
+}
+
+
+  // начальная установка и слушатели
+  update();
+  addEventListener('scroll', onScrollOrResize, { passive: true });
+  addEventListener('resize', onScrollOrResize);
+
+  // если пользователь меняет настройку motion на лету — обновим
+  reduce.addEventListener?.('change', update);
+})();
+
+// ===== Лёгкая горизонтальная прокрутка (wheel + drag) =====
+(() => {
+  const scroller = document.getElementById('section-nav');
+  if (!scroller) return;
+
+  // РАФ-троттлинг одного шага
+  let raf = 0;
+  function rafScroll(dx) {
+    if (raf) return; // накопление не нужно, пусть браузер решит
+    raf = requestAnimationFrame(() => {
+      scroller.scrollLeft += dx;
+      raf = 0;
+    });
+  }
+
+  // аккуратно конвертируем wheel -> X, предотвращаем дефолт ТОЛЬКО если реально скроллим по X
+  scroller.addEventListener('wheel', (e) => {
+    // если трекпад даёт deltaX — пользуемся им нативно
+    let dx = Math.abs(e.deltaX) > Math.abs(e.deltaY) ? e.deltaX : e.deltaY;
+
+    // масштаб для deltaMode (строки vs пиксели)
+    // 0: pixels, 1: lines, 2: pages
+    const modeScale = e.deltaMode === 1 ? 16 : (e.deltaMode === 2 ? scroller.clientWidth : 1);
+    dx *= modeScale;
+
+    if (dx === 0) return;
+
+    const before = scroller.scrollLeft;
+    rafScroll(dx * 0.9); // чуть мягче
+
+    // если есть куда прокрутиться по X — блокируем вертикальный скролл страницы
+    const willScrollLeft = before > 0 || dx > 0;
+    const willScrollRight = before < scroller.scrollWidth - scroller.clientWidth || dx < 0;
+
+    if ((willScrollLeft && dx < 0) || (willScrollRight && dx > 0)) {
+      e.preventDefault();
+    }
+  }, { passive: false });
+
+  // Перетаскивание мышью (лёгкое)
+  let isDown = false, startX = 0, startLeft = 0;
+  scroller.addEventListener('mousedown', (e) => {
+    isDown = true;
+    startX = e.clientX;
+    startLeft = scroller.scrollLeft;
+    scroller.classList.add('dragging');
+  });
+  window.addEventListener('mousemove', (e) => {
+    if (!isDown) return;
+    const dx = e.clientX - startX;
+    scroller.scrollLeft = startLeft - dx;
+  });
+  window.addEventListener('mouseup', () => {
+    isDown = false;
+    scroller.classList.remove('dragging');
+  });
+
+  // курсор/выделение во время драга
+  const css = document.createElement('style');
+  css.textContent = `
+    #section-nav.dragging { cursor: grabbing; }
+    #section-nav.dragging * { user-select: none; }
+  `;
+  document.head.appendChild(css);
+})();

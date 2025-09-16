@@ -6,8 +6,7 @@
     <title>Галерея — Гостиный Домик</title>
     <link rel="stylesheet" href="/src/index.css" />
   </head>
-  <body class="bg-white text-gray-900">
-    <!-- Hero-зона с тем же сабнавигационным меню -->
+  <body class="gallery-skin text-gray-900">
     <section class="relative isolate overflow-hidden min-h-[55svh] pb-16 sm:pb-24">
       <img
         src="/img/hero.jpg"
@@ -67,7 +66,7 @@
 
     <!-- NAV по разделам -->
     <aside class="sticky top-2 z-30 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-      <div class="overflow-x-auto -mt-10 pb-2">
+      <div class="overflow-x-auto -mt-10 pb-2 edge-fade" id="section-nav" aria-label="Разделы галереи">
         <div class="inline-flex gap-2 whitespace-nowrap rounded-xl bg-white shadow ring-1 ring-black/10 p-1">
           <button class="px-3 py-1.5 rounded-lg text-sm font-semibold hover:bg-gray-100" data-scroll-to="hotel">Отель и территория</button>
           <button class="px-3 py-1.5 rounded-lg text-sm font-semibold hover:bg-gray-100" data-scroll-to="junior-suite-family">Полулюкс семейный</button>
@@ -82,6 +81,7 @@
       </div>
     </aside>
 
+    <div id="photo-gradient" aria-hidden="true"></div>
 
     <!-- ГАЛЕРЕИ -->
     <main class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-10">
@@ -277,7 +277,7 @@
             </button>
             <button class="gallery-thumb"
                     data-gallery="family-double"
-                    data-src="/img/gallery/family-double/2.webp"
+                    data-src="/img/gallery/family-double/02.webp"
                     data-src-full="/img/gallery/family-double/02@2x.webp">
               <img src="/img/gallery/family-double/02.webp" alt="family-double — фото 2">
             </button>
