@@ -80,3 +80,13 @@
 #lb-thumbs::-webkit-scrollbar-track { background:transparent; }
 #lb-thumbs::-webkit-scrollbar-thumb { background: rgba(140,175,215,.9); border-radius:999px; }
 #lb-thumbs::-webkit-scrollbar-thumb:hover { background: rgba(120,160,200,1); }
+
+/* индикатор в десктоп-сабнаве */
+[data-subnav] [data-indicator]{
+  will-change: transform, width;
+  transition: transform .45s cubic-bezier(.22,.8,.22,1), width .45s cubic-bezier(.22,.8,.22,1);
+  /* если на главной используется другая кривая — поставь ту же */
+}
+@media (prefers-reduced-motion: reduce){
+  [data-subnav] [data-indicator]{ transition: none; }
+}

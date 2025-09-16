@@ -1,21 +1,5 @@
-// ======================
-//  Subnav (desktop)
-// ======================
-(() => {
-  const indicator = document.querySelector('[data-indicator]');
-  const active = document.querySelector('[data-route="gallery"]');
-  const wrap = document.querySelector('[data-subnav]');
-  if (!indicator || !active || !wrap) return;
-
-  const place = () => {
-    const r = active.getBoundingClientRect();
-    const w = wrap.getBoundingClientRect();
-    indicator.style.transform = `translate3d(${r.left - w.left}px,0,0)`;
-    indicator.style.width = `${r.width}px`;
-  };
-  place();
-  window.addEventListener('resize', place);
-})();
+import { initSubnav } from './nav.js';
+initSubnav();
 
 // ======================
 //  Локальный навигатор
@@ -505,3 +489,4 @@ scroller.addEventListener('wheel', (e) => {
   `;
   document.head.appendChild(css);
 })();
+

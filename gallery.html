@@ -34,30 +34,51 @@
 
       <!-- Subnav (копия с главной, путь /gallery.html активен через JS) -->
       <nav aria-label="Разделы сайта">
-        <!-- mobile -->
+          <!-- mobile: сетка с «таблеткой» -->
         <div class="sm:hidden mb-5 px-4">
-          <div class="relative p-3 overflow-hidden" data-subnav-mobile>
+        <div class="relative p-3 overflow-hidden" data-subnav-mobile>
             <div class="grid grid-cols-2 gap-4">
-              <a href="./"   data-route="home"     class="subnav-mobile-link relative z-10 text-center rounded-xl px-4 py-2.5 text-sm font-semibold text-white/80 hover:text-gray-100 transition"><span class="inline-block px-3 py-1">Главная</span></a>
-              <a href="./pricing.html" data-route="pricing"  class="subnav-mobile-link relative z-10 text-center rounded-xl px-4 py-2.5 text-sm font-semibold text-white/80 hover:text-gray-100 transition"><span class="inline-block px-3 py-1">Стоимость</span></a>
-              <a href="./gallery.html" data-route="gallery"  class="subnav-mobile-link relative z-10 text-center rounded-xl px-4 py-2.5 text-sm font-semibold text-white/90 transition" aria-current="page"><span class="inline-block px-3 py-1">Галерея</span></a>
-              <a href="./contacts.html" data-route="contacts" class="subnav-mobile-link relative z-10 text-center rounded-xl px-4 py-2.5 text-sm font-semibold text-white/80 hover:text-gray-100 transition"><span class="inline-block px-3 py-1">Контакты</span></a>
+            <a href="./" data-route="home"
+                class="subnav-mobile-link relative z-10 text-center rounded-xl px-4 py-2.5 text-sm font-semibold text-white/80 hover:text-gray-100 transition">
+                <span class="inline-block px-3 py-1">Главная</span>
+            </a>
+            <a href="./pricing.html" data-route="pricing"
+                class="subnav-mobile-link relative z-10 text-center rounded-xl px-4 py-2.5 text-sm font-semibold text-white/80 hover:text-gray-100 transition">
+                <span class="inline-block px-3 py-1">Стоимость</span>
+            </a>
+            <a href="./gallery.html" data-route="gallery"
+                class="subnav-mobile-link relative z-10 text-center rounded-xl px-4 py-2.5 text-sm font-semibold text-white/80 hover:text-gray-100 transition">
+                <span class="inline-block px-3 py-1">Галерея</span>
+            </a>
+            <a href="./contacts.html" data-route="contacts"
+                class="subnav-mobile-link relative z-10 text-center rounded-xl px-4 py-2.5 text-sm font-semibold text-white/80 hover:text-gray-100 transition">
+                <span class="inline-block px-3 py-1">Контакты</span>
+            </a>
+            </div>
+        </div>
+        </div>
+
+
+          <!-- desktop: плавающий индикатор -->
+          <div class="hidden sm:flex absolute left-1/2 -translate-x-1/2 top-6 z-20" data-subnav>
+            <div class="relative flex items-center gap-12 rounded-full bg-white/12 backdrop-blur-md ring-1 ring-white/20 shadow-lg px-1 py-1">
+              <a href="./"  data-route="home"
+                 class="subnav-link relative z-10 rounded-full px-4 py-1.5 text-sm font-semibold text-white/80 hover:text-gray-900 transition">Главная</a>
+              <a href="./pricing.html" data-route="pricing"
+                 class="subnav-link relative z-10 rounded-full px-4 py-1.5 text-sm font-semibold text-white/80 hover:text-gray-900 transition">Стоимость</a>
+              <a href="./gallery.html" data-route="gallery"
+                 class="subnav-link relative z-10 rounded-full px-4 py-1.5 text-sm font-semibold text-white/80 hover:text-gray-900 transition">Галерея</a>
+              <a href="./contacts.html" data-route="contacts"
+                 class="subnav-link relative z-10 rounded-full px-4 py-1.5 text-sm font-semibold text-white/80 hover:text-gray-900 transition">Контакты</a>
+
+              <!-- индикатор активной вкладки -->
+              <span data-indicator
+                class="pointer-events-none absolute inset-y-1 left-0 rounded-full bg-white ring-1 ring-black/10 shadow transition-all duration-300 ease-out z-0"
+                style="width:0;transform:translate3d(0,0,0);will-change:transform,width;">
+              </span>
             </div>
           </div>
-        </div>
-
-        <!-- desktop -->
-        <div class="hidden sm:flex absolute left-1/2 -translate-x-1/2 top-6 z-20" data-subnav>
-          <div class="relative flex items-center gap-12 rounded-full bg-white/12 backdrop-blur-md ring-1 ring-white/20 shadow-lg px-1 py-1">
-            <a href="./"    data-route="home"     class="subnav-link relative z-10 rounded-full px-4 py-1.5 text-sm font-semibold text-white/80 hover:text-gray-900 transition">Главная</a>
-            <a href="./pricing.html"  data-route="pricing"  class="subnav-link relative z-10 rounded-full px-4 py-1.5 text-sm font-semibold text-white/80 hover:text-gray-900 transition">Стоимость</a>
-            <a href="./gallery.html"  data-route="gallery"  class="subnav-link relative z-10 rounded-full px-4 py-1.5 text-sm font-semibold text-gray-900 bg-white ring-1 ring-black/10">Галерея</a>
-            <a href="./contacts.html" data-route="contacts" class="subnav-link relative z-10 rounded-full px-4 py-1.5 text-sm font-semibold text-white/80 hover:text-gray-900 transition">Контакты</a>
-
-            <span data-indicator class="pointer-events-none absolute inset-y-1 left-0 rounded-full bg-white ring-1 ring-black/10 shadow transition-all duration-300 ease-out z-0" style="width:0;"></span>
-          </div>
-        </div>
-      </nav>
+        </nav>
 
       <div class="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 pt-20 pb-8 text-white">
         <h1 class="text-3xl sm:text-5xl font-extrabold drop-shadow-[0_3px_14px_rgba(0,0,0,.55)]">Галерея</h1>
