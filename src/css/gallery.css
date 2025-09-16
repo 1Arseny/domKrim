@@ -1,0 +1,82 @@
+/* ===== Галерея: фон и секции ===== */
+.gallery-skin {
+  background:
+    radial-gradient(24rem 24rem at 10% 0%, rgba(99, 102, 241, 0.06), transparent 60%),
+    radial-gradient(18rem 18rem at 90% 20%, rgba(16, 185, 129, 0.06), transparent 60%),
+    linear-gradient(#fafafa, #f3f4f6);
+}
+
+/* «подложка» под секции без тяжёлых коробок */
+.gallery-section { position: relative; }
+.gallery-section::before {
+  content: "";
+  position: absolute;
+  inset: -8px -8px -2px;
+  z-index: -1;
+  border-radius: 16px;
+  background:
+    radial-gradient(120px 120px at 10% 10%, rgba(0,0,0,0.02), transparent 70%),
+    radial-gradient(120px 120px at 90% 20%, rgba(0,0,0,0.02), transparent 70%);
+}
+
+/* ===== Галерея: ховер карточек ===== */
+.gallery-thumb { border-radius: 12px; overflow: hidden; cursor: zoom-in; -webkit-tap-highlight-color: transparent; }
+.gallery-thumb img {
+  display:block; width:100%; height:100%; object-fit:cover;
+  transition: transform .22s cubic-bezier(.2,.6,.2,1), box-shadow .22s ease, filter .22s ease;
+  will-change: transform; backface-visibility: hidden;
+}
+.gallery-thumb:hover img, .gallery-thumb:focus-visible img {
+  transform: translateY(-6px) scale(1.02);
+  box-shadow: 0 14px 28px rgba(0,0,0,.12), 0 10px 10px rgba(0,0,0,.06);
+}
+.gallery-thumb:active img { transform: translateY(-2px) scale(0.995); box-shadow: 0 8px 18px rgba(0,0,0,.12); }
+@media (prefers-reduced-motion: reduce) {
+  .gallery-thumb img { transition:none; }
+  .gallery-thumb:hover img, .gallery-thumb:focus-visible img, .gallery-thumb:active img { transform:none; box-shadow:none; }
+}
+
+/* ===== Динамический небесный фон (нижний слой) ===== */
+#photo-gradient {
+  position: fixed; inset: 0; z-index: -3; pointer-events: none;
+  --angle: 180deg; --shiftX: 50%; --shiftY: 50%;
+  --tone: 0.45; --vignette: 0.03;
+  background:
+    radial-gradient(70rem 70rem at var(--shiftX) var(--shiftY),
+      rgba(255,255,255, calc(var(--tone) * .8)), rgba(135,206,250,0) 70%),
+    linear-gradient(var(--angle),
+      rgba(173,216,230, calc(var(--tone) * .55)) 0%,
+      rgba(135,206,250, calc(var(--tone) * .45)) 70%),
+    linear-gradient(180deg, #dff3ff, #fafdff);
+  box-shadow: inset 0 0 120px rgba(0,0,0,var(--vignette));
+}
+@media (prefers-reduced-motion: reduce){
+  #photo-gradient { --angle: 180deg; --shiftX:50%; --shiftY:40%; --tone:.28; --vignette:.05; }
+}
+
+/* ===== Горизонтальный нав (под галерею) ===== */
+#section-nav { scroll-behavior:auto; scrollbar-gutter:stable both-edges; -webkit-overflow-scrolling:touch; overscroll-behavior:contain; }
+.edge-fade {
+  -webkit-mask-image: linear-gradient(to right, transparent 0, #000 28px, #000 calc(100% - 28px), transparent 100%);
+  mask-image: linear-gradient(to right, transparent 0, #000 28px, #000 calc(100% - 28px), transparent 100%);
+}
+/* Firefox */
+#section-nav { scrollbar-width:thin; scrollbar-color: rgba(120,160,200,.7) rgba(200,220,240,.35); }
+/* WebKit */
+#section-nav::-webkit-scrollbar { height:8px; }
+#section-nav::-webkit-scrollbar-track { background: rgba(200,220,240,.35); border-radius:999px; }
+#section-nav::-webkit-scrollbar-thumb {
+  background: linear-gradient(90deg, rgba(120,160,200,.9), rgba(150,190,230,.9));
+  border-radius:999px; border:2px solid rgba(200,220,240,.35);
+}
+#section-nav::-webkit-scrollbar-thumb:hover { background: linear-gradient(90deg, rgba(110,150,195,1), rgba(140,180,220,1)); }
+
+/* ===== Лента миниатюр лайтбокса ===== */
+#lb-thumbs { scrollbar-gutter:stable both-edges; -webkit-overflow-scrolling:touch; overscroll-behavior:contain; }
+/* Firefox */
+#lb-thumbs { scrollbar-width:thin; scrollbar-color: rgba(160,190,220,.8) transparent; }
+/* WebKit */
+#lb-thumbs::-webkit-scrollbar { height:6px; }
+#lb-thumbs::-webkit-scrollbar-track { background:transparent; }
+#lb-thumbs::-webkit-scrollbar-thumb { background: rgba(140,175,215,.9); border-radius:999px; }
+#lb-thumbs::-webkit-scrollbar-thumb:hover { background: rgba(120,160,200,1); }

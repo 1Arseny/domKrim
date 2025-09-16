@@ -162,9 +162,9 @@ function titleByGroupId(id) {
 
 // закрытие по клику на фон
 lb.addEventListener('click', (e) => {
-  const stage = document.getElementById('lb-stage');
-  if (e.target === lb || e.target === stage) closeLightbox();
+  if (e.target === lb || e.target === lbStage) closeLightbox();
 });
+
 
 // ======================
 //  Zoom & Pan (touch + desktop)
@@ -191,13 +191,14 @@ function resetZoom() {
 }
 
 function clampPan() {
-  const imgRect = lbImg.getBoundingClientRect();
+  const imgRect = lbImg.getBoundingClientRect();   // уже с учётом scale
   const stageRect = lbStage.getBoundingClientRect();
-  const maxX = Math.max(0, (imgRect.width * scale - stageRect.width) / 2);
-  const maxY = Math.max(0, (imgRect.height * scale - stageRect.height) / 2);
+  const maxX = Math.max(0, (imgRect.width  - stageRect.width)  / 2);
+  const maxY = Math.max(0, (imgRect.height - stageRect.height) / 2);
   translateX = Math.min(maxX, Math.max(-maxX, translateX));
   translateY = Math.min(maxY, Math.max(-maxY, translateY));
 }
+
 
 // ----- Touch -----
 let startDist = 0;
@@ -396,28 +397,23 @@ function update(){
   }
 
   // аккуратно конвертируем wheel -> X, предотвращаем дефолт ТОЛЬКО если реально скроллим по X
-  scroller.addEventListener('wheel', (e) => {
-    // если трекпад даёт deltaX — пользуемся им нативно
-    let dx = Math.abs(e.deltaX) > Math.abs(e.deltaY) ? e.deltaX : e.deltaY;
+scroller.addEventListener('wheel', (e) => {
+  let dx = Math.abs(e.deltaX) > Math.abs(e.deltaY) ? e.deltaX : e.deltaY;
+  const modeScale = e.deltaMode === 1 ? 16 : (e.deltaMode === 2 ? scroller.clientWidth : 1);
+  dx *= modeScale;
+  if (!dx) return;
 
-    // масштаб для deltaMode (строки vs пиксели)
-    // 0: pixels, 1: lines, 2: pages
-    const modeScale = e.deltaMode === 1 ? 16 : (e.deltaMode === 2 ? scroller.clientWidth : 1);
-    dx *= modeScale;
+  const before = scroller.scrollLeft;
+  rafScroll(dx * 0.9);
 
-    if (dx === 0) return;
+  const canLeft  = before > 0;
+  const canRight = before < scroller.scrollWidth - scroller.clientWidth;
 
-    const before = scroller.scrollLeft;
-    rafScroll(dx * 0.9); // чуть мягче
+  if ((dx < 0 && canLeft) || (dx > 0 && canRight)) {
+    e.preventDefault();
+  }
+}, { passive: false });
 
-    // если есть куда прокрутиться по X — блокируем вертикальный скролл страницы
-    const willScrollLeft = before > 0 || dx > 0;
-    const willScrollRight = before < scroller.scrollWidth - scroller.clientWidth || dx < 0;
-
-    if ((willScrollLeft && dx < 0) || (willScrollRight && dx > 0)) {
-      e.preventDefault();
-    }
-  }, { passive: false });
 
   // Перетаскивание мышью (лёгкое)
   let isDown = false, startX = 0, startLeft = 0;
@@ -442,6 +438,70 @@ function update(){
   css.textContent = `
     #section-nav.dragging { cursor: grabbing; }
     #section-nav.dragging * { user-select: none; }
+  `;
+  document.head.appendChild(css);
+})();
+
+// ===== Горизонтальная прокрутка миниатюр (wheel + drag) =====
+(() => {
+  const scroller = document.getElementById('lb-thumbs');
+  if (!scroller) return;
+
+  // RAF-троттлинг, чтобы прокрутка была «лёгкой»
+  let raf = 0;
+  function rafScroll(dx) {
+    if (raf) return;
+    raf = requestAnimationFrame(() => {
+      scroller.scrollLeft += dx;
+      raf = 0;
+    });
+  }
+
+  // wheel: вертикальное колесо -> горизонтальная прокрутка,
+  // но блокируем дефолт ТОЛЬКО если реально есть куда скроллить по X
+  scroller.addEventListener('wheel', (e) => {
+    let dx = Math.abs(e.deltaX) > Math.abs(e.deltaY) ? e.deltaX : e.deltaY;
+
+    // учёт deltaMode (строки/страницы)
+    const modeScale = e.deltaMode === 1 ? 16 : (e.deltaMode === 2 ? scroller.clientWidth : 1);
+    dx *= modeScale;
+
+    if (!dx) return;
+
+    const before = scroller.scrollLeft;
+    rafScroll(dx * 0.9);
+
+    const canLeft  = before > 0;
+    const canRight = before < scroller.scrollWidth - scroller.clientWidth;
+
+    // если двигаемся в доступную сторону — предотвращаем вертикальный скролл страницы
+    if ((dx < 0 && canLeft) || (dx > 0 && canRight)) {
+      e.preventDefault();
+    }
+  }, { passive: false });
+
+  // Перетаскивание мышью
+  let isDown = false, startX = 0, startLeft = 0;
+  scroller.addEventListener('mousedown', (e) => {
+    isDown = true;
+    startX = e.clientX;
+    startLeft = scroller.scrollLeft;
+    scroller.classList.add('dragging');
+  });
+  window.addEventListener('mousemove', (e) => {
+    if (!isDown) return;
+    scroller.scrollLeft = startLeft - (e.clientX - startX);
+  });
+  window.addEventListener('mouseup', () => {
+    isDown = false;
+    scroller.classList.remove('dragging');
+  });
+
+  // во время драга отключаем выделение (косметика)
+  const css = document.createElement('style');
+  css.textContent = `
+    #lb-thumbs.dragging { cursor: grabbing; }
+    #lb-thumbs.dragging * { user-select: none; }
   `;
   document.head.appendChild(css);
 })();
