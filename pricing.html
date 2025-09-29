@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html lang="ru">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Гостиный Домик — Стоимость</title>
+
+    <link rel="stylesheet" href="/src/index.css" />
+    <link rel="preconnect" href="https://res.cloudinary.com" crossorigin>
+  </head>
+  <body class="bg-white text-gray-900">
+    <!-- Hero / Заголовок страницы -->
+    <section id="hero" class="relative isolate overflow-hidden min-h-[64svh] sm:min-h-[70svh] pb-16 sm:pb-0">
+      <!-- Фон -->
+      <picture>
+        <source srcset="https://res.cloudinary.com/drxnyjdlx/image/upload/f_avif,q_auto,w_1920/hero_je6h7j.webp" type="image/avif" />
+        <source srcset="https://res.cloudinary.com/drxnyjdlx/image/upload/f_webp,q_auto,w_1920/hero_je6h7j.webp" type="image/webp" />
+        <img src="https://res.cloudinary.com/drxnyjdlx/image/upload/f_auto,q_auto,w_1920/hero_je6h7j.webp" alt="Летняя терраса и бассейн во дворе гостевого дома" class="absolute inset-0 -z-10 h-full w-full object-cover object-center" decoding="async" fetchpriority="high" width="1920" height="1080" />
+      </picture>
+
+      <!-- Оверлеи -->
+      <div class="absolute inset-0 -z-10 bg-gradient-to-b from-black/60 via-black/30 to-black/50"></div>
+      <div class="absolute inset-0 -z-10 bg-gradient-to-r from-black/35 via-black/10 to-transparent md:from-black/30 md:via-black/10 md:to-transparent"></div>
+      <div class="pointer-events-none absolute inset-0 -z-10 opacity-45 bg-[radial-gradient(120%_80%_at_30%_40%,rgba(0,0,0,0.45)_0%,rgba(0,0,0,0.25)_35%,rgba(0,0,0,0)_60%)]"></div>
+
+      <!-- Верхняя строка -->
+      <header class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 pt-6">
+        <div class="flex items-center justify-between text-white/90 text-sm">
+          <div class="flex items-center gap-2">
+            <svg class="h-4 w-4" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 17.27 18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+            <span>Рейтинг гостей: <b>4.7/5</b> • 50+ отзывов</span>
+            <a href="https://yandex.ru/maps/?ll=34.806064%2C44.830130&z=17&pt=34.806064,44.830130,pm2rdm" target="_blank" rel="noopener" class="btn-ya" aria-label="Отзывы на Яндекс.Картах">
+              <span class="ya-badge">Я</span>
+              Отзывы на Яндексе
+            </a>
+          </div>
+          <div class="hidden sm:flex gap-6">
+            <span class="inline-flex items-center gap-1"><span class="h-2.5 w-2.5 rounded-full bg-emerald-400"></span> Свободно на ближайшие даты</span>
+            <span>До пляжа — 15&nbsp;минут пешком</span>
+          </div>
+        </div>
+      </header>
+
+      <!-- Контент заголовка + сабнав -->
+      <div class="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 pt-8 sm:pt-20 lg:pt-28 pb-10 sm:pb-20">
+        <!-- Subnav -->
+        <nav aria-label="Разделы сайта">
+          <!-- mobile: сетка с «таблеткой» -->
+          <div class="sm:hidden mb-5 px-4">
+            <div class="relative p-3 overflow-hidden" data-subnav-mobile>
+              <div class="grid grid-cols-2 gap-4">
+                <a href="./" data-route="home" class="subnav-mobile-link relative z-10 text-center rounded-xl px-4 py-2.5 text-sm font-semibold text-white/80 hover:text-gray-100 transition"><span class="inline-block px-3 py-1">Главная</span></a>
+                <a href="./pricing.html" data-route="pricing" class="subnav-mobile-link relative z-10 text-center rounded-xl px-4 py-2.5 text-sm font-semibold text-white text-gray-900 transition"><span class="inline-block px-3 py-1 bg-white/90 text-gray-900 rounded-full">Стоимость</span></a>
+                <a href="./gallery.html" data-route="gallery" class="subnav-mobile-link relative z-10 text-center rounded-xl px-4 py-2.5 text-sm font-semibold text-white/80 hover:text-gray-100 transition"><span class="inline-block px-3 py-1">Галерея</span></a>
+                <a href="./contacts.html" data-route="contacts" class="subnav-mobile-link relative z-10 text-center rounded-xl px-4 py-2.5 text-sm font-semibold text-white/80 hover:text-gray-100 transition"><span class="inline-block px-3 py-1">Контакты</span></a>
+              </div>
+            </div>
+          </div>
+          <!-- desktop: плавающий индикатор -->
+          <div class="hidden sm:flex absolute left-1/2 -translate-x-1/2 top-6 z-20" data-subnav>
+            <div class="relative flex items-center gap-12 rounded-full bg-white/12 backdrop-blur-md ring-1 ring-white/20 shadow-lg px-1 py-1">
+              <a href="./" data-route="home" class="subnav-link relative z-10 rounded-full px-4 py-1.5 text-sm font-semibold text-white/80 hover:text-gray-900 transition">Главная</a>
+              <a href="./pricing.html" data-route="pricing" class="subnav-link relative z-10 rounded-full px-4 py-1.5 text-sm font-semibold text-gray-900 bg-white shadow ring-1 ring-black/10">Стоимость</a>
+              <a href="./gallery.html" data-route="gallery" class="subnav-link relative z-10 rounded-full px-4 py-1.5 text-sm font-semibold text-white/80 hover:text-gray-900 transition">Галерея</a>
+              <a href="./contacts.html" data-route="contacts" class="subnav-link relative z-10 rounded-full px-4 py-1.5 text-sm font-semibold text-white/80 hover:text-gray-900 transition">Контакты</a>
+              <span data-indicator class="pointer-events-none absolute inset-y-1 left-0 rounded-full bg-white ring-1 ring-black/10 shadow transition-all duration-300 ease-out z-0" style="width:0;transform:translate3d(0,0,0);"></span>
+            </div>
+          </div>
+        </nav>
+
+        <div class="max-w-3xl">
+          <span class="inline-flex items-center rounded-full bg-white/15 px-3 py-1 text-xs font-medium text-white ring-1 ring-white/20 backdrop-blur-sm">Актуальные тарифы на сезон</span>
+          <h1 class="mt-5 text-3xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight text-white drop-shadow-[0_3px_14px_rgba(0,0,0,.55)]">Стоимость проживания</h1>
+          <p class="mt-4 text-base sm:text-lg text-white/90 sm:mt-6 max-w-2xl">Выберите период проживания, чтобы увидеть цены по типам номеров. Прямое бронирование — без комиссий. Предоплата 20%, бесплатная отмена за 14 дней.</p>
+          <div class="mt-6 hidden sm:flex items-center gap-2">
+            <a href="#booking" class="inline-flex items-center gap-2 rounded-full bg-white/15 px-3 py-1 text-xs font-medium text-white ring-1 ring-white/20 backdrop-blur-sm hover:bg-white/20">🧭 Как забронировать</a>
+          </div>
+        </div>
+
+        <!-- Липкая карточка подсказки -->
+        
+      </div>
+
+      <!-- Липкая панель CTA на мобилке -->
+      <div class="fixed inset-x-0 bottom-0 z-50 bg-white/95 backdrop-blur shadow-2xl ring-1 ring-black/10 sm:hidden">
+        <div class="mx-auto max-w-7xl px-4 py-3 flex items-center gap-3">
+          <a href="#booking" class="flex-1 inline-flex justify-center rounded-lg bg-emerald-500 px-4 py-3 text-white font-semibold">Бронировать</a>
+          <a href="https://wa.me/79990000000" target="_blank" rel="noopener" class="inline-flex justify-center rounded-lg bg-gray-900 px-4 py-3 text-white font-semibold">WhatsApp</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Контент страницы -->
+    <main class="relative -mt-10 sm:-mt-16">
+      <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <!-- Вкладки периодов -->
+        <div class="relative z-10 rounded-2xl bg-white shadow-xl ring-1 ring-black/5 p-4 sm:p-6">
+          <div class="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-4">
+            <div>
+              <h2 class="text-xl sm:text-2xl font-extrabold tracking-tight">Тарифные периоды</h2>
+              <p class="mt-1 text-sm text-gray-600">Цены указаны за номер/сутки.</p>
+            </div>
+            <div class="grid grid-cols-1 sm:grid-cols-3 gap-2">
+              <a href="#period-peak" class="period-link rounded-xl px-4 py-2 text-sm font-semibold bg-emerald-500 text-white shadow hover:bg-emerald-600">16 июля — 31 августа</a>
+              <a href="#period-shoulder" class="period-link rounded-xl px-4 py-2 text-sm font-semibold bg-gray-100 text-gray-900 ring-1 ring-black/10 hover:bg-gray-200">1–15 июля, 1–15 сентября</a>
+              <a href="#period-low" class="period-link rounded-xl px-4 py-2 text-sm font-semibold bg-gray-100 text-gray-900 ring-1 ring-black/10 hover:bg-gray-200">1 мая — 30 июня, 16–30 сентября</a>
+            </div>
+          </div>
+
+          <!-- Таблицы цен -->
+          <div class="mt-6 space-y-10">
+            <!-- Пик сезона -->
+            <section id="period-peak" data-period="peak">
+              <header class="flex items-center justify-between">
+                <h3 class="text-lg font-bold">Цены на период 16 июля — 31 августа</h3>
+                <span class="inline-flex items-center gap-1 rounded-full bg-emerald-50 px-3 py-1 text-xs font-medium text-emerald-700 ring-1 ring-emerald-200">Самый востребованный период</span>
+              </header>
+              <div class="mt-4 overflow-hidden rounded-xl ring-1 ring-black/10">
+                <table class="min-w-full divide-y divide-gray-200">
+                  <thead class="bg-gray-50">
+                    <tr>
+                      <th scope="col" class="px-4 py-3 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">Номер</th>
+                      <th scope="col" class="px-4 py-3 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">Цена</th>
+                      <th scope="col" class="px-4 py-3 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">В номере</th>
+                      <th scope="col" class="px-4 py-3 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">Площадь</th>
+                    </tr>
+                  </thead>
+                  <tbody class="divide-y divide-gray-100 bg-white text-sm">
+                    <tr><td class="px-4 py-3 font-medium">Эконом 3‑местный №1</td><td class="px-4 py-3">1 700 ₽</td><td class="px-4 py-3">TV, Wi‑Fi, двухъярусная кровать на 3 чел., холодильник, кондиционер, шкаф, 2 тумбочки, стол, зеркало, вешалка, подставка для обуви, пуфик, сейф</td><td class="px-4 py-3">10,5 м²</td></tr>
+                    <tr><td class="px-4 py-3 font-medium">Эконом 3‑местный №2</td><td class="px-4 py-3">1 700 ₽</td><td class="px-4 py-3">TV, Wi‑Fi, двухъярусная кровать на 3 чел., холодильник, кондиционер, шкаф, 2 тумбочки, стол, зеркало, вешалка, подставка для обуви, пуфик, сейф</td><td class="px-4 py-3">9 м²</td></tr>
+                    <tr><td class="px-4 py-3 font-medium">Эконом 2‑местный №3</td><td class="px-4 py-3">1 500 ₽</td><td class="px-4 py-3">TV, Wi‑Fi, двуспальная кровать или 2 односпальные, холодильник, кондиционер, шкаф, 2 тумбочки, стол, зеркало, вешалка, подставка для обуви, пуфик, сейф</td><td class="px-4 py-3">7,5 м²</td></tr>
+                    <tr><td class="px-4 py-3 font-medium">Эконом 2‑местный №4</td><td class="px-4 py-3">1 500 ₽</td><td class="px-4 py-3">TV, Wi‑Fi, двуспальная кровать (возможность доп. места), кондиционер, шкафы, 2 тумбочки, зеркало, пуфик, балкон, сейф</td><td class="px-4 py-3">12 м²</td></tr>
+                    <tr><td class="px-4 py-3 font-medium">Эконом 3‑местный №5</td><td class="px-4 py-3">1 700 ₽</td><td class="px-4 py-3">TV, Wi‑Fi, двуспальная кровать (возможность доп. места) + односпальная, кондиционер, шкафы, 2 тумбочки, зеркало, пуфик, балкон</td><td class="px-4 py-3">14 м²</td></tr>
+                    <tr><td class="px-4 py-3 font-medium">Эконом 3‑местный №6</td><td class="px-4 py-3">1 700 ₽</td><td class="px-4 py-3">TV, Wi‑Fi, двуспальная кровать (возможность доп. места) + односпальная, кондиционер, шкафы, 2 тумбочки, зеркало, пуфик, балкон</td><td class="px-4 py-3">12,5 м²</td></tr>
+                    <tr><td class="px-4 py-3 font-medium">Полулюкс №7</td><td class="px-4 py-3">1 900 ₽</td><td class="px-4 py-3">TV, Wi‑Fi, холодильник, кондиционер, трюмо, зеркало, пуфик, шкаф, 2 кровати, балкон, с/у (унитаз, раковина, душ), сейф</td><td class="px-4 py-3">15 м²</td></tr>
+                    <tr><td class="px-4 py-3 font-medium">Полулюкс №8</td><td class="px-4 py-3">2 000 ₽</td><td class="px-4 py-3">TV, Wi‑Fi, холодильник, кондиционер, трюмо, зеркало, пуфик, шкаф, двуспальная кровать и односпальная, балкон, с/у (унитаз, раковина, душ), сейф</td><td class="px-4 py-3">15 м²</td></tr>
+                    <tr><td class="px-4 py-3 font-medium">Полулюкс семейный №9</td><td class="px-4 py-3">2 200 ₽</td><td class="px-4 py-3">TV, Wi‑Fi, холодильник, кондиционер, трюмо, зеркало, пуфик, шкаф, двуспальная кровать, двухъярусная кровать, балкон, с/у (унитаз, раковина, душ), сейф</td><td class="px-4 py-3">19,5 м²</td></tr>
+                    <tr><td class="px-4 py-3 font-medium">Полулюкс семейный №10</td><td class="px-4 py-3">2 200 ₽</td><td class="px-4 py-3">TV, Wi‑Fi, холодильник, кондиционер, трюмо, зеркало, пуфик, шкаф, двуспальная кровать, двухъярусная кровать, балкон, с/у (унитаз, раковина, душ), сейф</td><td class="px-4 py-3">19,5 м²</td></tr>
+                    <tr><td class="px-4 py-3 font-medium">2‑комнатные апартаменты с кухней</td><td class="px-4 py-3">4 000 ₽</td><td class="px-4 py-3">TV, Wi‑Fi, двуспальная кровать, шкаф, тумбочка, кондиционер, с/у (унитаз, раковина, душ), сейф, раскладной диван, кухня</td><td class="px-4 py-3">28 м²</td></tr>
+                    <tr><td class="px-4 py-3 font-medium">Одноместный №11, №14</td><td class="px-4 py-3">1 200 ₽</td><td class="px-4 py-3">TV, Wi‑Fi, односпальная кровать, шкаф, тумбочка, кондиционер, с/у (унитаз, раковина, душ)</td><td class="px-4 py-3">9 м²</td></tr>
+                  </tbody>
+                </table>
+              </div>
+              <div class="mt-4 grid grid-cols-1 sm:grid-cols-2 gap-4 text-sm">
+                <div class="rounded-xl border border-emerald-200 bg-emerald-50 p-4">
+                  <h4 class="font-semibold text-emerald-800">Входит в стоимость</h4>
+                  <ul class="mt-2 list-disc pl-5 text-emerald-900/90 space-y-1">
+                    <li>Проживание, бесплатный Wi‑Fi, сейф</li>
+                    <li>Пользование открытым бассейном</li>
+                    <li>Летняя кухня, барбекю с мангалом и казаном</li>
+                    <li>Закрытая бесплатная парковка</li>
+                    <li>Настольный теннис</li>
+                    <li>Заказ и бронирование билетов</li>
+                  </ul>
+                </div>
+                <div class="rounded-xl border border-gray-200 bg-gray-50 p-4">
+                  <h4 class="font-semibold text-gray-900">За доплату</h4>
+                  <ul class="mt-2 list-disc pl-5 text-gray-700 space-y-1">
+                    <li>Экскурсии по Крыму, поездки в аквапарк и дельфинарий</li>
+                    <li>Питание (завтрак/обед/ужин по согласованию)</li>
+                    <li>Аренда бара с караоке</li>
+                    <li>Встреча на ЖД вокзале и в аэропорту (трансфер)</li>
+                    <li>Сауна</li>
+                    <li>Лодка с вёслами для рыбалки</li>
+                  </ul>
+                </div>
+              </div>
+            </section>
+
+            <!-- Плечи сезона -->
+            <section id="period-shoulder" data-period="shoulder" hidden>
+              <header class="flex items-center justify-between">
+                <h3 class="text-lg font-bold">Цены на период 1–15 июля и 1–15 сентября</h3>
+              </header>
+              <div class="mt-4 overflow-hidden rounded-xl ring-1 ring-black/10">
+                <table class="min-w-full divide-y divide-gray-200">
+                  <thead class="bg-gray-50">
+                    <tr>
+                      <th class="px-4 py-3 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">Номер</th>
+                      <th class="px-4 py-3 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">Цена</th>
+                      <th class="px-4 py-3 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">В номере</th>
+                      <th class="px-4 py-3 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">Площадь</th>
+                    </tr>
+                  </thead>
+                  <tbody class="divide-y divide-gray-100 bg-white text-sm">
+                    <tr><td class="px-4 py-3 font-medium">Эконом 3‑местный №1</td><td class="px-4 py-3">1 500 ₽</td><td class="px-4 py-3">TV, Wi‑Fi, двухъярусная кровать на 3 чел., холодильник, кондиционер, шкаф, 2 тумбочки, стол, зеркало, вешалка, подставка для обуви, пуфик, сейф</td><td class="px-4 py-3">10,5 м²</td></tr>
+                    <tr><td class="px-4 py-3 font-medium">Эконом 3‑местный №2</td><td class="px-4 py-3">1 500 ₽</td><td class="px-4 py-3">TV, Wi‑Fi, двухъярусная кровать на 3 чел., холодильник, кондиционер, шкаф, 2 тумбочки, стол, зеркало, вешалка, подставка для обуви, пуфик, сейф</td><td class="px-4 py-3">9 м²</td></tr>
+                    <tr><td class="px-4 py-3 font-medium">Эконом 2‑местный №3</td><td class="px-4 py-3">1 300 ₽</td><td class="px-4 py-3">TV, Wi‑Fi, двуспальная или 2 односпальные, холодильник, кондиционер, шкаф, 2 тумбочки, стол, зеркало, вешалка, подставка для обуви, пуфик, сейф</td><td class="px-4 py-3">7,5 м²</td></tr>
+                    <tr><td class="px-4 py-3 font-medium">Эконом 2‑местный №4</td><td class="px-4 py-3">1 300 ₽</td><td class="px-4 py-3">TV, Wi‑Fi, двуспальная кровать (доп. место по запросу), кондиционер, шкафы, 2 тумбочки, зеркало, пуфик, балкон, сейф</td><td class="px-4 py-3">12 м²</td></tr>
+                    <tr><td class="px-4 py-3 font-medium">Эконом 3‑местный №5</td><td class="px-4 py-3">1 500 ₽</td><td class="px-4 py-3">TV, Wi‑Fi, двуспальная + односпальная кровать, кондиционер, шкафы, 2 тумбочки, зеркало, пуфик, балкон</td><td class="px-4 py-3">14 м²</td></tr>
+                    <tr><td class="px-4 py-3 font-medium">Эконом 3‑местный №6</td><td class="px-4 py-3">1 500 ₽</td><td class="px-4 py-3">TV, Wi‑Fi, двуспальная + односпальная кровать, кондиционер, шкафы, 2 тумбочки, зеркало, пуфик, балкон</td><td class="px-4 py-3">12,5 м²</td></tr>
+                    <tr><td class="px-4 py-3 font-medium">Полулюкс №7</td><td class="px-4 py-3">1 700 ₽</td><td class="px-4 py-3">TV, Wi‑Fi, холодильник, кондиционер, трюмо, зеркало, пуфик, шкаф, 2 кровати, балкон, с/у (унитаз, раковина, душ), сейф</td><td class="px-4 py-3">15 м²</td></tr>
+                    <tr><td class="px-4 py-3 font-medium">Полулюкс №8</td><td class="px-4 py-3">1 900 ₽</td><td class="px-4 py-3">TV, Wi‑Fi, холодильник, кондиционер, трюмо, зеркало, пуфик, шкаф, двуспальная и односпальная кровать, с/у (унитаз, раковина, душ), сейф</td><td class="px-4 py-3">15 м²</td></tr>
+                    <tr><td class="px-4 py-3 font-medium">Полулюкс семейный №9</td><td class="px-4 py-3">2 100 ₽</td><td class="px-4 py-3">TV, Wi‑Fi, холодильник, кондиционер, трюмо, зеркало, пуфик, шкаф, двуспальная кровать, двухъярусная кровать, балкон, с/у, сейф</td><td class="px-4 py-3">19,5 м²</td></tr>
+                    <tr><td class="px-4 py-3 font-medium">Полулюкс семейный №10</td><td class="px-4 py-3">2 100 ₽</td><td class="px-4 py-3">TV, Wi‑Fi, холодильник, кондиционер, трюмо, зеркало, пуфик, шкаф, двуспальная кровать, двухъярусная кровать, балкон, с/у, сейф</td><td class="px-4 py-3">19,5 м²</td></tr>
+                    <tr><td class="px-4 py-3 font-medium">2‑комнатные апартаменты с кухней</td><td class="px-4 py-3">3 500 ₽</td><td class="px-4 py-3">TV, Wi‑Fi, двуспальная кровать, шкаф, тумбочка, кондиционер, с/у, сейф, раскладной диван</td><td class="px-4 py-3">28 м²</td></tr>
+                    <tr><td class="px-4 py-3 font-medium">Одноместный №12</td><td class="px-4 py-3">1 100 ₽</td><td class="px-4 py-3">TV, Wi‑Fi, односпальная кровать, шкаф, тумбочка, кондиционер, с/у</td><td class="px-4 py-3">9 м²</td></tr>
+                    <tr><td class="px-4 py-3 font-medium">Одноместный №14</td><td class="px-4 py-3">1 100 ₽</td><td class="px-4 py-3">TV, Wi‑Fi, односпальная кровать, шкаф, тумбочка, кондиционер, с/у</td><td class="px-4 py-3">9 м²</td></tr>
+                  </tbody>
+                </table>
+              </div>
+              <div class="mt-4 grid grid-cols-1 sm:grid-cols-2 gap-4 text-sm">
+                <div class="rounded-xl border border-emerald-200 bg-emerald-50 p-4">
+                  <h4 class="font-semibold text-emerald-800">Входит в стоимость</h4>
+                  <ul class="mt-2 list-disc pl-5 text-emerald-900/90 space-y-1">
+                    <li>Проживание, бесплатный Wi‑Fi, сейф</li>
+                    <li>Пользование открытым бассейном</li>
+                    <li>Летняя кухня</li>
+                    <li>Барбекю с мангалом и казаном</li>
+                    <li>Бесплатная закрытая парковка</li>
+                    <li>Настольный теннис</li>
+                    <li>Заказ и бронирование билетов</li>
+                  </ul>
+                </div>
+                <div class="rounded-xl border border-gray-200 bg-gray-50 p-4">
+                  <h4 class="font-semibold text-gray-900">За доплату</h4>
+                  <ul class="mt-2 list-disc pl-5 text-gray-700 space-y-1">
+                    <li>Экскурсионные туры по Крыму</li>
+                    <li>Поездки в аквапарк и дельфинарий</li>
+                    <li>Питание (по согласованию)</li>
+                    <li>Аренда бара с караоке</li>
+                    <li>Встреча на ЖД вокзале и в аэропорту</li>
+                    <li>Сауна</li>
+                    <li>Лодка с вёслами для рыбалки</li>
+                  </ul>
+                </div>
+              </div>
+            </section>
+
+            <!-- Низкий сезон -->
+            <section id="period-low" data-period="low" hidden>
+              <header class="flex items-center justify-between">
+                <h3 class="text-lg font-bold">Цены на период 1 мая — 30 июня и 16–30 сентября</h3>
+              </header>
+              <div class="mt-4 overflow-hidden rounded-xl ring-1 ring-black/10">
+                <table class="min-w-full divide-y divide-gray-200">
+                  <thead class="bg-gray-50">
+                    <tr>
+                      <th class="px-4 py-3 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">Номер</th>
+                      <th class="px-4 py-3 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">Цена</th>
+                      <th class="px-4 py-3 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">В номере</th>
+                      <th class="px-4 py-3 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">Площадь</th>
+                    </tr>
+                  </thead>
+                  <tbody class="divide-y divide-gray-100 bg-white text-sm">
+                    <tr><td class="px-4 py-3 font-medium">Эконом 3‑местный №1</td><td class="px-4 py-3">1 300 ₽</td><td class="px-4 py-3">TV, Wi‑Fi, двухъярусная кровать на 3 чел., холодильник, кондиционер, шкаф, 2 тумбочки, стол, зеркало, вешалка, подставка для обуви, пуфик, сейф</td><td class="px-4 py-3">10,5 м²</td></tr>
+                    <tr><td class="px-4 py-3 font-medium">Эконом 3‑местный №2</td><td class="px-4 py-3">1 300 ₽</td><td class="px-4 py-3">TV, Wi‑Fi, двухъярусная кровать на 3 чел., холодильник, кондиционер, шкаф, 2 тумбочки, стол, зеркало, вешалка, подставка для обуви, пуфик, сейф</td><td class="px-4 py-3">9 м²</td></tr>
+                    <tr><td class="px-4 py-3 font-medium">Эконом 2‑местный №3</td><td class="px-4 py-3">1 100 ₽</td><td class="px-4 py-3">TV, Wi‑Fi, двуспальная или 2 односпальные, холодильник, кондиционер, шкаф, 2 тумбочки, стол, зеркало, вешалка, подставка для обуви, пуфик, сейф</td><td class="px-4 py-3">7,5 м²</td></tr>
+                    <tr><td class="px-4 py-3 font-medium">Эконом 2‑местный №4</td><td class="px-4 py-3">1 100 ₽</td><td class="px-4 py-3">TV, Wi‑Fi, двуспальная кровать (доп. место по запросу), кондиционер, шкафы, 2 тумбочки, зеркало, пуфик, балкон, сейф</td><td class="px-4 py-3">12 м²</td></tr>
+                    <tr><td class="px-4 py-3 font-medium">Эконом 3‑местный №5</td><td class="px-4 py-3">1 300 ₽</td><td class="px-4 py-3">TV, Wi‑Fi, двуспальная + односпальная кровать, кондиционер, шкафы, 2 тумбочки, зеркало, пуфик, балкон, сейф</td><td class="px-4 py-3">14 м²</td></tr>
+                    <tr><td class="px-4 py-3 font-medium">Эконом 3‑местный №6</td><td class="px-4 py-3">1 300 ₽</td><td class="px-4 py-3">TV, Wi‑Fi, двуспальная + односпальная кровать, кондиционер, шкафы, 2 тумбочки, зеркало, пуфик, балкон, сейф</td><td class="px-4 py-3">12,5 м²</td></tr>
+                    <tr><td class="px-4 py-3 font-medium">Полулюкс №7</td><td class="px-4 py-3">2 300 ₽</td><td class="px-4 py-3">TV, Wi‑Fi, холодильник, кондиционер, трюмо, зеркало, пуфик, шкаф, двуспальная кровать, балкон, с/у (унитаз, раковина, душ), сейф</td><td class="px-4 py-3">15 м²</td></tr>
+                    <tr><td class="px-4 py-3 font-medium">Полулюкс №8</td><td class="px-4 py-3">1 500 ₽</td><td class="px-4 py-3">TV, Wi‑Fi, холодильник, кондиционер, трюмо, зеркало, пуфик, шкаф, двуспальная и односпальная кровать, балкон, с/у, сейф</td><td class="px-4 py-3">15 м²</td></tr>
+                    <tr><td class="px-4 py-3 font-medium">Полулюкс семейный №9</td><td class="px-4 py-3">1 900 ₽</td><td class="px-4 py-3">TV, Wi‑Fi, холодильник, кондиционер, трюмо, зеркало, пуфик, шкаф, двуспальная кровать и двухъярусная кровать, балкон, с/у, сейф</td><td class="px-4 py-3">19,5 м²</td></tr>
+                    <tr><td class="px-4 py-3 font-medium">Полулюкс семейный №10</td><td class="px-4 py-3">1 900 ₽</td><td class="px-4 py-3">TV, Wi‑Fi, холодильник, кондиционер, трюмо, зеркало, пуфик, шкаф, двуспальная кровать и двухъярусная кровать, балкон, с/у, сейф</td><td class="px-4 py-3">19,5 м²</td></tr>
+                    <tr><td class="px-4 py-3 font-medium">2‑комнатные апартаменты с кухней</td><td class="px-4 py-3">3 000 ₽</td><td class="px-4 py-3">TV, Wi‑Fi, двуспальная кровать, шкаф, тумбочка, кондиционер, с/у, сейф, раскладной диван</td><td class="px-4 py-3">28 м²</td></tr>
+                    <tr><td class="px-4 py-3 font-medium">Полулюкс №12</td><td class="px-4 py-3">1 500 ₽</td><td class="px-4 py-3">TV, Wi‑Fi, двуспальная кровать, шкаф, тумбочка, кондиционер, с/у</td><td class="px-4 py-3">9 м²</td></tr>
+                    <tr><td class="px-4 py-3 font-medium">Одноместный №11, №14</td><td class="px-4 py-3">1 000 ₽</td><td class="px-4 py-3">TV, Wi‑Fi, односпальная кровать, шкаф, тумбочка, кондиционер, с/у</td><td class="px-4 py-3">9 м²</td></tr>
+                  </tbody>
+                </table>
+              </div>
+              <div class="mt-4 grid grid-cols-1 sm:grid-cols-2 gap-4 text-sm">
+                <div class="rounded-xl border border-emerald-200 bg-emerald-50 p-4">
+                  <h4 class="font-semibold text-emerald-800">Входит в стоимость</h4>
+                  <ul class="mt-2 list-disc pl-5 text-emerald-900/90 space-y-1">
+                    <li>Проживание, бесплатный Wi‑Fi, сейф</li>
+                    <li>Пользование открытым бассейном</li>
+                    <li>Летняя кухня, барбекю зона</li>
+                    <li>Бесплатная закрытая парковка</li>
+                    <li>Настольный теннис</li>
+                    <li>Заказ и бронирование билетов</li>
+                  </ul>
+                </div>
+                <div class="rounded-xl border border-gray-200 bg-gray-50 p-4">
+                  <h4 class="font-semibold text-gray-900">За доплату</h4>
+                  <ul class="mt-2 list-disc pl-5 text-gray-700 space-y-1">
+                    <li>Экскурсии по Крыму, поездки в аквапарк и дельфинарий</li>
+                    <li>Питание (по согласованию)</li>
+                    <li>Аренда бара с караоке</li>
+                    <li>Трансфер (кондиционированный, 2–8 мест)</li>
+                    <li>Сауна (финская)</li>
+                    <li>Лодка с вёслами</li>
+                  </ul>
+                </div>
+              </div>
+            </section>
+          </div>
+
+          <!-- Примечания -->
+          <div class="mt-8 grid grid-cols-1 sm:grid-cols-3 gap-4 text-sm">
+            <div class="rounded-xl bg-amber-50 ring-1 ring-amber-200 p-4"><strong class="font-semibold">Бронирование</strong><p class="mt-1 text-amber-900/90">Предоплата 20%. Бесплатная отмена за 14 дней до заезда.</p></div>
+            <div class="rounded-xl bg-blue-50 ring-1 ring-blue-200 p-4"><strong class="font-semibold">Заезд/выезд</strong><p class="mt-1 text-blue-900/90">Заезд после 14:00, выезд до 12:00. Ранний заезд и поздний выезд по возможности.</p></div>
+            <div class="rounded-xl bg-gray-50 ring-1 ring-gray-200 p-4"><strong class="font-semibold">Оплата</strong><p class="mt-1 text-gray-700">Наличные, перевод по СБП. Чеки по запросу.</p></div>
+          </div>
+        </div>
+
+        <!-- Блок CTA -->
+        <section id="booking" class="relative mt-10 sm:mt-16 mb-16">
+          <div class="overflow-hidden rounded-2xl bg-white p-6 sm:p-8 ring-1 ring-emerald-200 shadow-xl">
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 items-center">
+              <div class="lg:col-span-2">
+                <h3 class="text-2xl font-extrabold text-gray-900">Готовы забронировать?</h3>
+                <p class="mt-2 text-gray-700">Напишите нам в WhatsApp или позвоните — расскажем о наличии номеров и поможем выбрать лучший вариант.</p>
+                <ul class="mt-3 flex flex-wrap gap-2 text-gray-800 text-sm">
+                  <li class="inline-flex items-center gap-2 rounded-lg bg-emerald-50 px-3 py-2 ring-1 ring-emerald-200">🏖️ 15 мин до пляжа</li>
+                  <li class="inline-flex items-center gap-2 rounded-lg bg-emerald-50 px-3 py-2 ring-1 ring-emerald-200">🍽️ Домашние завтраки</li>
+                  <li class="inline-flex items-center gap-2 rounded-lg bg-emerald-50 px-3 py-2 ring-1 ring-emerald-200">🚗 Закрытая парковка</li>
+                </ul>
+              </div>
+              <div class="flex flex-col sm:flex-row lg:flex-col gap-3">
+                <a href="https://wa.me/79990000000" target="_blank" rel="noopener" class="inline-flex items-center justify-center gap-2 rounded-xl bg-emerald-500 px-6 py-3 text-base font-semibold text-white hover:bg-emerald-600 focus:outline-none focus-visible:ring-4 focus-visible:ring-emerald-300 transition">WhatsApp</a>
+                <button type="button" class="inline-flex items-center justify-center gap-2 rounded-xl bg-gray-900 px-6 py-3 text-base font-semibold text-white hover:bg-black focus:outline-none focus-visible:ring-4 focus-visible:ring-emerald-300 transition" data-cta="show-phone">Показать телефон</button>
+              </div>
+            </div>
+          </div>
+        </section>
+      </div>
+    </main>
+
+    <script type="module" src="/src/main.js"></script>
+    <script type="module" src="/src/main.js"></script>
+    <script>
+      // Переключение периодов по hash (#period-...)
+      const sections = document.querySelectorAll('[data-period]');
+      const links = document.querySelectorAll('.period-link');
+      function setPeriodFromHash() {
+        const hash = location.hash || '#period-peak';
+        sections.forEach(sec => sec.toggleAttribute('hidden', `#${sec.id}` !== hash));
+        links.forEach(a => {
+          const active = a.getAttribute('href') === hash;
+          a.classList.toggle('bg-emerald-500', active);
+          a.classList.toggle('text-white', active);
+          a.classList.toggle('hover:bg-emerald-600', active);
+          a.classList.toggle('bg-gray-100', !active);
+          a.classList.toggle('text-gray-900', !active);
+          a.classList.toggle('ring-1', !active);
+          a.classList.toggle('ring-black/10', !active);
+        });
+      }
+      window.addEventListener('hashchange', setPeriodFromHash);
+      setPeriodFromHash();
+
+      // Маска «показать телефон» (используется и на главной)
+      document.querySelectorAll('[data-cta="show-phone"]').forEach(el => {
+        el.addEventListener('click', () => {
+          el.outerHTML = '<a href="tel:+79990000000" class="inline-flex items-center justify-center gap-2 rounded-xl bg-gray-900 px-6 py-3 text-base font-semibold text-white hover:bg-black focus:outline-none focus-visible:ring-4 focus-visible:ring-emerald-300 transition">+7 999 000‑00‑00</a>';
+        });
+      });
+    </script>
+  </body>
+</html>
