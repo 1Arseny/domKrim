@@ -46,24 +46,47 @@
         <!-- Subnav -->
         <nav aria-label="Разделы сайта">
           <!-- mobile: сетка с «таблеткой» -->
-          <div class="sm:hidden mb-5 px-4">
-            <div class="relative p-3 overflow-hidden" data-subnav-mobile>
-              <div class="grid grid-cols-2 gap-4">
-                <a href="./" data-route="home" class="subnav-mobile-link relative z-10 text-center rounded-xl px-4 py-2.5 text-sm font-semibold text-white/80 hover:text-gray-100 transition"><span class="inline-block px-3 py-1">Главная</span></a>
-                <a href="./pricing.html" data-route="pricing" class="subnav-mobile-link relative z-10 text-center rounded-xl px-4 py-2.5 text-sm font-semibold text-white text-gray-900 transition"><span class="inline-block px-3 py-1 bg-white/90 text-gray-900 rounded-full">Стоимость</span></a>
-                <a href="./gallery.html" data-route="gallery" class="subnav-mobile-link relative z-10 text-center rounded-xl px-4 py-2.5 text-sm font-semibold text-white/80 hover:text-gray-100 transition"><span class="inline-block px-3 py-1">Галерея</span></a>
-                <a href="./contacts.html" data-route="contacts" class="subnav-mobile-link relative z-10 text-center rounded-xl px-4 py-2.5 text-sm font-semibold text-white/80 hover:text-gray-100 transition"><span class="inline-block px-3 py-1">Контакты</span></a>
-              </div>
+        <div class="sm:hidden mb-5 px-4">
+        <div class="relative p-3 overflow-hidden" data-subnav-mobile>
+            <div class="grid grid-cols-2 gap-4">
+            <a href="./" data-route="home"
+                class="subnav-mobile-link relative z-10 text-center rounded-xl px-4 py-2.5 text-sm font-semibold text-white/80 hover:text-gray-100 transition">
+                <span class="inline-block px-3 py-1">Главная</span>
+            </a>
+            <a href="./pricing.html" data-route="pricing"
+                class="subnav-mobile-link relative z-10 text-center rounded-xl px-4 py-2.5 text-sm font-semibold text-white/80 hover:text-gray-100 transition">
+                <span class="inline-block px-3 py-1">Стоимость</span>
+            </a>
+            <a href="./gallery.html" data-route="gallery"
+                class="subnav-mobile-link relative z-10 text-center rounded-xl px-4 py-2.5 text-sm font-semibold text-white/80 hover:text-gray-100 transition">
+                <span class="inline-block px-3 py-1">Галерея</span>
+            </a>
+            <a href="./contacts.html" data-route="contacts"
+                class="subnav-mobile-link relative z-10 text-center rounded-xl px-4 py-2.5 text-sm font-semibold text-white/80 hover:text-gray-100 transition">
+                <span class="inline-block px-3 py-1">Контакты</span>
+            </a>
             </div>
-          </div>
+        </div>
+        </div>
+
+
           <!-- desktop: плавающий индикатор -->
           <div class="hidden sm:flex absolute left-1/2 -translate-x-1/2 top-6 z-20" data-subnav>
             <div class="relative flex items-center gap-12 rounded-full bg-white/12 backdrop-blur-md ring-1 ring-white/20 shadow-lg px-1 py-1">
-              <a href="./" data-route="home" class="subnav-link relative z-10 rounded-full px-4 py-1.5 text-sm font-semibold text-white/80 hover:text-gray-900 transition">Главная</a>
-              <a href="./pricing.html" data-route="pricing" class="subnav-link relative z-10 rounded-full px-4 py-1.5 text-sm font-semibold text-gray-900 bg-white shadow ring-1 ring-black/10">Стоимость</a>
-              <a href="./gallery.html" data-route="gallery" class="subnav-link relative z-10 rounded-full px-4 py-1.5 text-sm font-semibold text-white/80 hover:text-gray-900 transition">Галерея</a>
-              <a href="./contacts.html" data-route="contacts" class="subnav-link relative z-10 rounded-full px-4 py-1.5 text-sm font-semibold text-white/80 hover:text-gray-900 transition">Контакты</a>
-              <span data-indicator class="pointer-events-none absolute inset-y-1 left-0 rounded-full bg-white ring-1 ring-black/10 shadow transition-all duration-300 ease-out z-0" style="width:0;transform:translate3d(0,0,0);"></span>
+              <a href="./"  data-route="home"
+                 class="subnav-link relative z-10 rounded-full px-4 py-1.5 text-sm font-semibold text-white/80 hover:text-gray-900 transition">Главная</a>
+              <a href="./pricing.html" data-route="pricing"
+                 class="subnav-link relative z-10 rounded-full px-4 py-1.5 text-sm font-semibold text-white/80 hover:text-gray-900 transition">Стоимость</a>
+              <a href="./gallery.html" data-route="gallery"
+                 class="subnav-link relative z-10 rounded-full px-4 py-1.5 text-sm font-semibold text-white/80 hover:text-gray-900 transition">Галерея</a>
+              <a href="./contacts.html" data-route="contacts"
+                 class="subnav-link relative z-10 rounded-full px-4 py-1.5 text-sm font-semibold text-white/80 hover:text-gray-900 transition">Контакты</a>
+
+              <!-- индикатор активной вкладки -->
+              <span data-indicator
+                class="pointer-events-none absolute inset-y-1 left-0 rounded-full bg-white ring-1 ring-black/10 shadow transition-all duration-300 ease-out z-0"
+                style="width:0;transform:translate3d(0,0,0);will-change:transform,width;">
+              </span>
             </div>
           </div>
         </nav>
@@ -100,11 +123,20 @@
               <h2 class="text-xl sm:text-2xl font-extrabold tracking-tight">Тарифные периоды</h2>
               <p class="mt-1 text-sm text-gray-600">Цены указаны за номер/сутки.</p>
             </div>
-            <div class="grid grid-cols-1 sm:grid-cols-3 gap-2">
-              <a href="#period-peak" class="period-link rounded-xl px-4 py-2 text-sm font-semibold bg-emerald-500 text-white shadow hover:bg-emerald-600">16 июля — 31 августа</a>
-              <a href="#period-shoulder" class="period-link rounded-xl px-4 py-2 text-sm font-semibold bg-gray-100 text-gray-900 ring-1 ring-black/10 hover:bg-gray-200">1–15 июля, 1–15 сентября</a>
-              <a href="#period-low" class="period-link rounded-xl px-4 py-2 text-sm font-semibold bg-gray-100 text-gray-900 ring-1 ring-black/10 hover:bg-gray-200">1 мая — 30 июня, 16–30 сентября</a>
-            </div>
+                <div class="grid grid-cols-1 sm:grid-cols-3 gap-2">
+                    <a href="#period-peak"
+                        class="period-link flex items-center justify-center text-center h-11 sm:h-10 rounded-xl px-4 py-2 text-sm font-semibold bg-emerald-500 text-white shadow hover:bg-emerald-600">
+                        16 июля — 31 августа
+                    </a>
+                    <a href="#period-shoulder"
+                        class="period-link flex items-center justify-center text-center h-11 sm:h-10 rounded-xl px-4 py-2 text-sm font-semibold bg-gray-100 text-gray-900 ring-1 ring-black/10 hover:bg-gray-200">
+                        1–15 июля, 1–15 сентября
+                    </a>
+                    <a href="#period-low"
+                        class="period-link flex items-center justify-center text-center h-11 sm:h-10 rounded-xl px-4 py-2 text-sm font-semibold bg-gray-100 text-gray-900 ring-1 ring-black/10 hover:bg-gray-200">
+                        1 мая — 30 июня, 16–30 сентября
+                    </a>
+                </div>
           </div>
 
           <!-- Таблицы цен -->
@@ -318,34 +350,6 @@
     </main>
 
     <script type="module" src="/src/main.js"></script>
-    <script type="module" src="/src/main.js"></script>
-    <script>
-      // Переключение периодов по hash (#period-...)
-      const sections = document.querySelectorAll('[data-period]');
-      const links = document.querySelectorAll('.period-link');
-      function setPeriodFromHash() {
-        const hash = location.hash || '#period-peak';
-        sections.forEach(sec => sec.toggleAttribute('hidden', `#${sec.id}` !== hash));
-        links.forEach(a => {
-          const active = a.getAttribute('href') === hash;
-          a.classList.toggle('bg-emerald-500', active);
-          a.classList.toggle('text-white', active);
-          a.classList.toggle('hover:bg-emerald-600', active);
-          a.classList.toggle('bg-gray-100', !active);
-          a.classList.toggle('text-gray-900', !active);
-          a.classList.toggle('ring-1', !active);
-          a.classList.toggle('ring-black/10', !active);
-        });
-      }
-      window.addEventListener('hashchange', setPeriodFromHash);
-      setPeriodFromHash();
-
-      // Маска «показать телефон» (используется и на главной)
-      document.querySelectorAll('[data-cta="show-phone"]').forEach(el => {
-        el.addEventListener('click', () => {
-          el.outerHTML = '<a href="tel:+79990000000" class="inline-flex items-center justify-center gap-2 rounded-xl bg-gray-900 px-6 py-3 text-base font-semibold text-white hover:bg-black focus:outline-none focus-visible:ring-4 focus-visible:ring-emerald-300 transition">+7 999 000‑00‑00</a>';
-        });
-      });
-    </script>
+    <script type="module" src="/src/js/pricing.js"></script>
   </body>
 </html>

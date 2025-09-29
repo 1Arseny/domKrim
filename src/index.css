@@ -40,4 +40,9 @@
     }
     .subnav-mobile-link[aria-current="page"]:hover { color: #fff; }
   }
+  
+}
+
+.period-link {
+  @apply transition-colors duration-200 ease-in-out;
 }
